@@ -25,7 +25,9 @@ def create_dom(dom_tree):
         parents[element.parent].append(tuple(element_list))
    
     data = buildtree(parents)
-    print_tree(data)
+    dom = create_list_from_tree(data)
+    html += ''.join(dom)
+   
     return html
 
 def buildtree(parents, t=None, parent_eid=0):
@@ -55,6 +57,18 @@ def print_tree(tree, html=''):
                 print("</" + child['name'] + ">")
 
     print("</" +tree['name'] + ">")
+
+def create_list_from_tree(tree, element_list=[]):
+    element_list.append(create_html_element(tree['element']))
+    for child in tree['children']:
+        if 'children' in child:
+            create_list_from_tree(child, element_list)
+        else:
+            element_list.append(create_html_element(child['element']))
+            if not(child['name'] == 'meta' or child['name'] == 'link'):
+                element_list.append("</" + child['name'] + ">")
+    element_list.append("</" +tree['name'] + ">")
+    return element_list
 
 def create_html_element(element):
     html = "<" + element.tag
