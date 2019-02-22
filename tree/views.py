@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Element
+import json
+from collections import defaultdict
+from pprint import pprint
 # Create your views here.
 
 def index(request):
@@ -13,25 +16,61 @@ def fetch(request):
 
 def create_dom(dom_tree):
     html = '<!doctype html>'
-    dom_tree_iterator = dom_tree.iterator()
-    next(dom_tree_iterator)
-    elements = []
+
+    # contstruct list of parents
+    parents = defaultdict(list)
+
     for element in dom_tree:
-        lft = element.lft
-        rgt = element.rgt
-        try:
-            next_element = next(dom_tree_iterator)
-        except StopIteration:
-            pass
+        element_list = [element, element.id]
+        parents[element.parent].append(tuple(element_list))
+   
+    data = buildtree(parents)
+    print_tree(data)
+    return html
+
+def buildtree(parents, t=None, parent_eid=0):
+    parent = parents.get(parent_eid, None)
+    if parent is None:
+        return t
+    for element, eid in parent:
+        report = {'id': element.id, 'name': element.tag, 'element': element}
+        if t is None:
+            t = report
         else:
-            next_lft = next_element.lft
-            element_html = None
-            if (lft <= next_lft <= rgt):
-                #element_html += "<" + next_element.tag + ">"
-                print("Element tag: " + element.tag + " " + str(element.lft) + " --- " + str(element.rgt) + " /// Next element: " + next_element.tag + " - " + str(next_lft))
-            else:
-                element_html = "<" + element.tag + ">"
-                element_html += "</" + element.tag + ">"
-            elements.append(element_html)
-    print(elements)
+            reports = t.setdefault('children', [])
+            reports.append(report)
+        buildtree(parents, report, eid)
+    return t
+
+def print_tree(tree, html=''):
+    # print("<" + tree['name'] + " " + str(tree['element']._class) + ">")
+    print(create_html_element(tree['element']))
+    for child in tree['children']:
+        if 'children' in child:
+            print_tree(child, html)
+        else:
+            # print("<" + child['name'] + " class=" + str(child['element']._class) + "></" + child['name'] + ">")
+            print(create_html_element(child['element']))
+            if not(child['name'] == 'meta' or child['name'] == 'link'):
+                print("</" + child['name'] + ">")
+
+    print("</" +tree['name'] + ">")
+
+def create_html_element(element):
+    html = "<" + element.tag
+    if(element._id):
+        html += " id=\"" + element._id + "\""
+    if(element._class):
+        html += " class=\"" + element._class + "\""
+    if(element.style):
+        html += " style=\"" + element.style + "\""
+    if(element.attributes):
+        attributes = json.loads(element.attributes)
+        for (index, attribute) in attributes.items():
+            html += " " + index + "=\"" + attribute + "\""
+    html += ">"
+    
+    if (element.content):
+        html += element.content
+
     return html
