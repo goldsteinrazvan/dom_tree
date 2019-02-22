@@ -8,8 +8,9 @@ class Element(models.Model):
     style = models.TextField(blank=True, null=True)
     attributes = models.TextField(blank=True, null=True)
     content = models.TextField(blank=True, null=True)
-    lft = models.IntegerField()
-    rgt = models.IntegerField()
+    parent = models.IntegerField(default=0)
+    lft = models.IntegerField(default=0)
+    rgt = models.IntegerField(default=0)
 
     def __str__(self):
         return '%s %s %s %s %s' % (self.tag, self._id, self.content, self.lft, self.rgt)
