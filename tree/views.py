@@ -10,27 +10,26 @@ def index(request):
     return HttpResponse("Hello World. You are at the tree index.")
 
 def fetch(request):
-    dom_tree = Element.objects.all()
-    html = create_dom(dom_tree)
+    elements = Element.objects.all()
+    html = create_dom(elements)
     return HttpResponse(html)
 
-def create_dom(dom_tree):
-    html = '<!doctype html>'
-
-    # contstruct list of parents
+def create_dom(elements):
+    # construct list of parent nodes
     parents = defaultdict(list)
 
-    for element in dom_tree:
+    for element in elements:
         element_list = [element, element.id]
         parents[element.parent].append(tuple(element_list))
-   
-    data = buildtree(parents)
-    dom = create_list_from_tree(data)
-    html += ''.join(dom)
+    
+    elements_tree = build_tree(parents)
+    dom = create_html_from_tree(elements_tree, [])
+    
+    html = '<!doctype html>' + ''.join(dom)
    
     return html
 
-def buildtree(parents, t=None, parent_eid=0):
+def build_tree(parents, t=None, parent_eid=0):
     parent = parents.get(parent_eid, None)
     if parent is None:
         return t
@@ -41,28 +40,14 @@ def buildtree(parents, t=None, parent_eid=0):
         else:
             reports = t.setdefault('children', [])
             reports.append(report)
-        buildtree(parents, report, eid)
+        build_tree(parents, report, eid)
     return t
 
-def print_tree(tree, html=''):
-    # print("<" + tree['name'] + " " + str(tree['element']._class) + ">")
-    print(create_html_element(tree['element']))
-    for child in tree['children']:
-        if 'children' in child:
-            print_tree(child, html)
-        else:
-            # print("<" + child['name'] + " class=" + str(child['element']._class) + "></" + child['name'] + ">")
-            print(create_html_element(child['element']))
-            if not(child['name'] == 'meta' or child['name'] == 'link'):
-                print("</" + child['name'] + ">")
-
-    print("</" +tree['name'] + ">")
-
-def create_list_from_tree(tree, element_list=[]):
+def create_html_from_tree(tree, element_list):
     element_list.append(create_html_element(tree['element']))
     for child in tree['children']:
         if 'children' in child:
-            create_list_from_tree(child, element_list)
+            create_html_from_tree(child, element_list)
         else:
             element_list.append(create_html_element(child['element']))
             if not(child['name'] == 'meta' or child['name'] == 'link'):
