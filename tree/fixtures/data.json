@@ -1,0 +1,220 @@
+[
+    {
+        "model": "tree.element", 
+        "pk": 1, 
+        "fields": {
+            "tag": "html", 
+            "attributes": {"lang": "en"}, 
+            "lft": 1, 
+            "rgt": 40, 
+            "parent": 0
+        }
+    }, 
+    {
+        "model": "tree.element", 
+        "pk": 2, 
+        "fields": {
+            "tag": "head", 
+            "lft": 2, 
+            "rgt": 13, 
+            "parent": 1
+        }
+    }, 
+    {
+        "model": "tree.element", 
+        "pk": 4, 
+        "fields": {
+            "tag": "meta", 
+            "attributes": {"charset":"utf-8"}, 
+            "lft": 3, 
+            "rgt": 4, 
+            "parent": 2
+        }
+    }, 
+    {
+        "model": "tree.element", 
+        "pk": 6, 
+        "fields": {
+            "tag": "meta", 
+            "attributes": {"name":"viewport","content":"width=device-width, initial-scale=1, shrink-to-fit=no"}, 
+            "lft": 5, 
+            "rgt": 6, 
+            "parent": 2
+        }
+    },
+    {
+        "model": "tree.element", 
+        "pk": 7, 
+        "fields": {
+            "tag": "link", 
+            "attributes": {"rel":"stylesheet", "href":"https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css", "integrity":"sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO", "crossorigin":"anonymous"}, 
+            "lft": 7, 
+            "rgt": 8, 
+            "parent": 2
+        }
+    },
+    {
+        "model": "tree.element", 
+        "pk": 8, 
+        "fields": {
+            "tag": "title", 
+            "content": "Such DOM, much tree!", 
+            "lft": 9, 
+            "rgt": 10, 
+            "parent": 2
+        }
+    },
+    {
+        "model": "tree.element", 
+        "pk": 9, 
+        "fields": {
+            "tag": "style", 
+            "content": ".container-border{border:3px solid #150276;margin-top:75px}.row-border{border:3px solid #02760C;margin:25px;padding:20px}.large-height{min-height:250px}.small-height{min-height:150px}.col-border{border:3px solid #581845}.inner-col-border{border:3px solid #C70039;min-height:75px;margin:15px}", 
+            "lft": 11, 
+            "rgt": 12, 
+            "parent": 2
+        }
+    },
+    {
+        "model": "tree.element", 
+        "pk": 10, 
+        "fields": {
+            "tag": "body", 
+            "lft": 14, 
+            "rgt": 39, 
+            "parent": 1
+        }
+    },
+    {
+        "model": "tree.element", 
+        "pk": 11, 
+        "fields": {
+            "tag": "div", 
+            "_class": "container container-border", 
+            "lft": 15, 
+            "rgt": 32, 
+            "parent": 10
+        }
+    },
+    {
+        "model": "tree.element", 
+        "pk": 12, 
+        "fields": {
+            "tag": "div", 
+            "_class": "row row-border large-height", 
+            "lft": 16, 
+            "rgt": 21, 
+            "parent": 11
+        }
+    },
+    {
+        "model": "tree.element", 
+        "pk": 13, 
+        "fields": {
+            "tag": "div", 
+            "_class": "col-md-5 col-border", 
+            "lft": 17, 
+            "rgt": 18, 
+            "parent": 12
+        }
+    },
+    {
+        "model": "tree.element", 
+        "pk": 14, 
+        "fields": {
+            "tag": "div", 
+            "_class": "col-md-5 ml-md-auto col-border", 
+            "lft": 19, 
+            "rgt": 20, 
+            "parent": 12
+        }
+    },
+    {
+        "model": "tree.element", 
+        "pk": 15, 
+        "fields": {
+            "tag": "div", 
+            "_class": "row row-border small-height", 
+            "lft": 22, 
+            "rgt": 31, 
+            "parent": 11
+        }
+    },
+    {
+        "model": "tree.element", 
+        "pk": 16, 
+        "fields": {
+            "tag": "div", 
+            "_class": "col-md-3 col-border", 
+            "lft": 23, 
+            "rgt": 24, 
+            "parent": 15
+        }
+    },
+    {
+        "model": "tree.element", 
+        "pk": 17, 
+        "fields": {
+            "tag": "div", 
+            "_class": "col-md-8 ml-md-auto col-border", 
+            "lft": 25, 
+            "rgt": 30, 
+            "parent": 15
+        }
+    },
+    {
+        "model": "tree.element", 
+        "pk": 18, 
+        "fields": {
+            "tag": "div", 
+            "_class": "row", 
+            "lft": 26, 
+            "rgt": 29, 
+            "parent": 17
+        }
+    },
+    {
+        "model": "tree.element", 
+        "pk": 19, 
+        "fields": {
+            "tag": "div", 
+            "_class": "col-md-3 ml-md-auto inner-col-border", 
+            "lft": 27, 
+            "rgt": 28, 
+            "parent": 18
+        }
+    },
+    {
+        "model": "tree.element", 
+        "pk": 20, 
+        "fields": {
+            "tag": "script", 
+            "attributes": {"src":"https://code.jquery.com/jquery-3.3.1.slim.min.js", "integrity":"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo", "crossorigin":"anonymous"},
+            "lft": 33, 
+            "rgt": 34, 
+            "parent": 10
+        }
+    },
+    {
+        "model": "tree.element", 
+        "pk": 21, 
+        "fields": {
+            "tag": "script", 
+            "attributes": {"src":"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js", "integrity":"sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49", "crossorigin":"anonymous"},
+            "lft": 35, 
+            "rgt": 36, 
+            "parent": 10
+        }
+    },
+    {
+        "model": "tree.element", 
+        "pk": 22, 
+        "fields": {
+            "tag": "script", 
+            "attributes": {"src":"https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js", "integrity":"sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy", "crossorigin":"anonymous"},
+            "lft": 37, 
+            "rgt": 38, 
+            "parent": 10
+        }
+    }
+]
