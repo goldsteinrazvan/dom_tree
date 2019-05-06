@@ -14,4 +14,3 @@ class Element(models.Model):
 
     def __str__(self):
         return '%s %s %s %s %s' % (self.tag, self._id, self.content, self.lft, self.rgt)
-
